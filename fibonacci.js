@@ -1,4 +1,8 @@
 function fibsIter(number) {
+	if (number === 1)
+		return ([0]);
+	else if (number < 1)
+		return ([]);
 	const result = [0, 1];
 	for (let i = 2; i < number; i++) {
 		result.push(result[i - 1] + result[i -2]);
@@ -7,7 +11,7 @@ function fibsIter(number) {
 }
 
 function fibsRec(number) {
-	if (number === 0)
+	if (number <= 0)
 		return ([]);
 	else if (number === 1)
 		return ([0]);
@@ -18,5 +22,7 @@ function fibsRec(number) {
 	return (result);
 }
 
-console.log(fibsIter(8));
-console.log(fibsRec(8));
+let number = 8;
+
+console.log(fibsIter(number));
+console.log(fibsRec(number));
