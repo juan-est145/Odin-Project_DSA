@@ -7,18 +7,18 @@ class Node {
 
 class LinkedList {
 	constructor() {
-		this.head = null;
+		this.listHead = null;
 		this.#listSize = 0;
 	}
 	#listSize;
 	append(value) {
-		if (this.head === null) {
-			this.head = new Node();
-			this.head.value = value;
+		if (this.listHead === null) {
+			this.listHead = new Node();
+			this.listHead.value = value;
 			this.#listSize++;
 			return;
 		}
-		let temp = this.head;
+		let temp = this.listHead;
 		while (temp.next != null)
 			temp = temp.next;
 		temp.next = new Node();
@@ -26,23 +26,26 @@ class LinkedList {
 		this.#listSize++;
 	}
 	prepend(value) {
-		if (this.head === null) {
-			this.head = new Node();
-			this.head.value = value;
+		if (this.listHead === null) {
+			this.listHead = new Node();
+			this.listHead.value = value;
 			this.#listSize++;
 			return;
 		}
 		const newNode = new Node();
 		newNode.value = value;
-		newNode.next = this.head;
-		this.head = newNode;
+		newNode.next = this.listHead;
+		this.listHead = newNode;
 		this.#listSize++;
 	}
 	size() {
 		return (this.#listSize);
 	}
+	head() {
+		return (this.listHead);
+	}
 	toString() {
-		let temp = this.head;
+		let temp = this.listHead;
 		let string = "";
 		while (temp != null) {
 			string += `( ${temp.value} ) -> `;
@@ -53,14 +56,15 @@ class LinkedList {
 	}
 }
 
-const head = new LinkedList();
+const listHead = new LinkedList();
 
-console.log(head.size());
+console.log(listHead.size());
 
-head.append(2);
-head.append(232);
-head.prepend("dasd");
+listHead.append(2);
+listHead.append(232);
+listHead.prepend("dasd");
 
-console.log(head.size());
+console.log(listHead.size());
 
+console.log(listHead.head());
 
