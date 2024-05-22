@@ -109,7 +109,7 @@ class LinkedList {
 		let temp = this.listHead;
 		if (!Number.isInteger(number) || number < 0)
 			return (null);
-		if (index === 0) {
+		if (number === 0) {
 			this.prepend(value);
 			return;
 		}
@@ -126,6 +126,28 @@ class LinkedList {
 		}
 		return (null);
 	}
+	removeAt(index) {
+		let number = parseInt(index);
+		let temp = this.listHead;
+		if (!Number.isInteger(number) || number < 0)
+			return (null);
+		if (this.listHead === null)
+			return (null);
+		if (number === 0) {
+			this.listHead = this.listHead.next;
+			this.#listSize--;
+			return ;
+		}
+		for (let i = 0; i < this.#listSize; i++) {
+			if (i === index - 1) {
+				temp.next = temp.next.next;
+				this.#listSize--;
+				return ;
+			}
+			temp = temp.next;
+		}
+		return (null);
+	}
 }
 
 const listHead = new LinkedList();
@@ -134,11 +156,5 @@ listHead.append("d");
 listHead.append(232);
 listHead.append(42);
 listHead.append(true);
-
-console.log(listHead.toString());
-console.log("");
-console.log(listHead.find(true));
-
-listHead.insertAt("Hola caracola", 0);
 
 console.log(listHead.toString());
