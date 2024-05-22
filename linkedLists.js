@@ -13,7 +13,7 @@ class LinkedList {
 		if (this.head === null) {
 			this.head = new Node();
 			this.head.value = value;
-			return ;
+			return;
 		}
 		let temp = this.head;
 		while (temp.next != null)
@@ -25,7 +25,7 @@ class LinkedList {
 		if (this.head === null) {
 			this.head = new Node();
 			this.head.value = value;
-			return ;
+			return;
 		}
 		const newNode = new Node();
 		newNode.value = value;
