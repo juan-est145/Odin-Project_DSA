@@ -63,6 +63,18 @@ class LinkedList {
 		return (temp);
 
 	}
+	pop() {
+		if (this.listHead === null)
+			return ;
+		if (this.listHead.next === null) {
+			this.listHead = null;
+			return ;
+		}
+		let temp = this.listHead;
+		while (temp.next.next != null)
+			temp = temp.next;
+		temp.next = null;
+	}
 	toString() {
 		let temp = this.listHead;
 		let string = "";
@@ -77,19 +89,11 @@ class LinkedList {
 
 const listHead = new LinkedList();
 
-
-listHead.append(2);
-listHead.append(232);
-listHead.prepend("dasd");
-listHead.append(323);
-listHead.prepend("Otro resultado exitoso");
-
+listHead.pop();
 console.log(listHead.toString());
-console.log("");
-console.log(listHead.at(0));
-console.log(listHead.at("1"));
-console.log(listHead.at(2));
-console.log(listHead.at(3));
-console.log(listHead.at(999));
-console.log(listHead.at("-1"));
-console.log(listHead.at(listHead.size() - 1));
+listHead.append("a");
+console.log(listHead.toString());
+listHead.pop();
+console.log(listHead.toString());
+listHead.pop();
+console.log(listHead.toString());
