@@ -104,6 +104,28 @@ class LinkedList {
 		string += "null";
 		return (string);
 	}
+	insertAt(value, index) {
+		let number = parseInt(index);
+		let temp = this.listHead;
+		if (!Number.isInteger(number) || number < 0)
+			return (null);
+		if (index === 0) {
+			this.prepend(value);
+			return;
+		}
+		for (let i = 0; i < this.#listSize; i++) {
+			if (i === index - 1) {
+				let newNode = new Node();
+				newNode.value = value;
+				newNode.next = temp.next;
+				temp.next = newNode;
+				this.#listSize++;
+				return (newNode);
+			}
+			temp = temp.next;
+		}
+		return (null);
+	}
 }
 
 const listHead = new LinkedList();
@@ -116,3 +138,7 @@ listHead.append(true);
 console.log(listHead.toString());
 console.log("");
 console.log(listHead.find(true));
+
+listHead.insertAt("Hola caracola", 0);
+
+console.log(listHead.toString());
