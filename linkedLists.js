@@ -50,6 +50,19 @@ class LinkedList {
 			temp = temp.next;
 		return (temp);
 	}
+	at (index) {
+		let number = parseInt(index);
+		if (!Number.isInteger(number) || number < 0)
+			return (null);
+		let temp = this.listHead;
+		for (let i = 0; i < number; i++) {
+			if (temp === null)
+				return (null);
+			temp = temp.next;
+		}
+		return (temp);
+
+	}
 	toString() {
 		let temp = this.listHead;
 		let string = "";
@@ -64,21 +77,19 @@ class LinkedList {
 
 const listHead = new LinkedList();
 
-console.log(listHead.size());
 
 listHead.append(2);
 listHead.append(232);
 listHead.prepend("dasd");
-
-console.log(listHead.size());
-
-console.log(listHead.head());
-console.log(listHead.tail());
-
 listHead.append(323);
 listHead.prepend("Otro resultado exitoso");
 
-console.log(listHead.tail());
-console.log(listHead.head());
-
 console.log(listHead.toString());
+console.log("");
+console.log(listHead.at(0));
+console.log(listHead.at("1"));
+console.log(listHead.at(2));
+console.log(listHead.at(3));
+console.log(listHead.at(999));
+console.log(listHead.at("-1"));
+console.log(listHead.at(listHead.size() - 1));
