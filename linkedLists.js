@@ -50,7 +50,7 @@ class LinkedList {
 			temp = temp.next;
 		return (temp);
 	}
-	at (index) {
+	at(index) {
 		let number = parseInt(index);
 		if (!Number.isInteger(number) || number < 0)
 			return (null);
@@ -61,19 +61,20 @@ class LinkedList {
 			temp = temp.next;
 		}
 		return (temp);
-
 	}
 	pop() {
 		if (this.listHead === null)
-			return ;
+			return;
 		if (this.listHead.next === null) {
 			this.listHead = null;
-			return ;
+			this.#listSize--;
+			return;
 		}
 		let temp = this.listHead;
 		while (temp.next.next != null)
 			temp = temp.next;
 		temp.next = null;
+		this.#listSize--;
 	}
 	contains(value) {
 		let temp = this.listHead;
@@ -83,6 +84,15 @@ class LinkedList {
 			temp = temp.next;
 		}
 		return (false);
+	}
+	find(value) {
+		let temp = this.listHead;
+		for (let i = 0; i < this.#listSize; i++) {
+			if (temp.value === value)
+				return (i);
+			temp = temp.next;
+		}
+		return (null);
 	}
 	toString() {
 		let temp = this.listHead;
@@ -98,17 +108,11 @@ class LinkedList {
 
 const listHead = new LinkedList();
 
-listHead.pop();
-console.log(listHead.toString());
-listHead.append("a");
-console.log(listHead.toString());
-listHead.pop();
-console.log(listHead.toString());
-listHead.pop();
-console.log(listHead.toString());
+listHead.append("d");
+listHead.append(232);
+listHead.append(42);
+listHead.append(true);
 
-listHead.prepend("xd");
-console.log(listHead.contains("xd"));
-console.log(listHead.contains(false));
-listHead.append(false);
-console.log(listHead.contains(false));
+console.log(listHead.toString());
+console.log("");
+console.log(listHead.find(true));
