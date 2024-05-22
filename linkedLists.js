@@ -21,15 +21,24 @@ class LinkedList {
 		temp.next = new Node();
 		temp.next.value = value;
 	}
+	toString() {
+		let temp = this.head;
+		let string = "";
+		while (temp != null) {
+			string += `( ${temp.value} ) -> `;
+			temp = temp.next;
+		}
+		string += "null";
+		return (string);
+	}
 }
 
 const head = new LinkedList();
-
-//console.log(head);
 
 head.append(32);
 head.append(433);
 head.append(932);
 head.append(312);
 
-console.log(head);
+console.log(head.toString());
+console.log(head.toString());
