@@ -75,6 +75,15 @@ class LinkedList {
 			temp = temp.next;
 		temp.next = null;
 	}
+	contains(value) {
+		let temp = this.listHead;
+		while (temp != null) {
+			if (temp.value === value)
+				return (true);
+			temp = temp.next;
+		}
+		return (false);
+	}
 	toString() {
 		let temp = this.listHead;
 		let string = "";
@@ -97,3 +106,9 @@ listHead.pop();
 console.log(listHead.toString());
 listHead.pop();
 console.log(listHead.toString());
+
+listHead.prepend("xd");
+console.log(listHead.contains("xd"));
+console.log(listHead.contains(false));
+listHead.append(false);
+console.log(listHead.contains(false));
