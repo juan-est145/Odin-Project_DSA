@@ -21,6 +21,17 @@ class LinkedList {
 		temp.next = new Node();
 		temp.next.value = value;
 	}
+	prepend(value) {
+		if (this.head === null) {
+			this.head = new Node();
+			this.head.value = value;
+			return ;
+		}
+		const newNode = new Node();
+		newNode.value = value;
+		newNode.next = this.head;
+		this.head = newNode;
+	}
 	toString() {
 		let temp = this.head;
 		let string = "";
@@ -35,10 +46,3 @@ class LinkedList {
 
 const head = new LinkedList();
 
-head.append(32);
-head.append(433);
-head.append(932);
-head.append(312);
-
-console.log(head.toString());
-console.log(head.toString());
