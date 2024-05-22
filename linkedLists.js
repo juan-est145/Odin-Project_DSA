@@ -44,6 +44,12 @@ class LinkedList {
 	head() {
 		return (this.listHead);
 	}
+	tail() {
+		let temp = this.listHead;
+		while (temp.next != null)
+			temp = temp.next;
+		return (temp);
+	}
 	toString() {
 		let temp = this.listHead;
 		let string = "";
@@ -67,4 +73,12 @@ listHead.prepend("dasd");
 console.log(listHead.size());
 
 console.log(listHead.head());
+console.log(listHead.tail());
 
+listHead.append(323);
+listHead.prepend("Otro resultado exitoso");
+
+console.log(listHead.tail());
+console.log(listHead.head());
+
+console.log(listHead.toString());
