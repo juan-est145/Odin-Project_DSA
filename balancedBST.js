@@ -1,13 +1,13 @@
 const prettyPrint = (node, prefix = "", isLeft = true) => {
 	if (node === null) {
-	  return;
+		return;
 	}
 	if (node.right !== null) {
-	  prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+		prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
 	}
 	console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
 	if (node.left !== null) {
-	  prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+		prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
 	}
 };
 
@@ -46,6 +46,15 @@ class BinaryTree {
 		else if (value > root.data)
 			root.right = this.insert(value, root.right);
 		return (root);
+	}
+	find(value, root = this.root) {
+		if (root === null)
+			return (null);
+		else if (value === root.data)
+			return (root);
+		else if (value < root.data)
+			return (this.find(value, root.left));
+		return (this.find(value, root.right));
 	}
 }
 
