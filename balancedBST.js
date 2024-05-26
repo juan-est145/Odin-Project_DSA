@@ -56,9 +56,32 @@ class BinaryTree {
 			return (this.find(value, root.left));
 		return (this.find(value, root.right));
 	}
+	levelOrder(callback, root = this.root) {
+		if (root === null)
+			return (null);
+		const queue = [];
+		const result = [];
+		queue.push(root);
+		while (queue.length !== 0) {
+			if (queue[0].left !== null)
+				queue.push(queue[0].left);
+			if (queue[0].right !== null)
+				queue.push(queue[0].right);
+			let currentNode = queue.shift(); 
+			if (callback)
+				callback(currentNode);
+			else
+				result.push(currentNode.data);
+		}
+		if (!callback)
+			return (result);
+	}
 }
 
 const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-bST.insert(3242);
-bST.insert(24);
+prettyPrint(bST.root);
+console.log(bST.levelOrder());
+bST.levelOrder((item) => {
+	item.data *= 2;
+});
 prettyPrint(bST.root);
