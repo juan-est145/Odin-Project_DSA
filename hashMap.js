@@ -13,8 +13,14 @@ class BucketNode {
 class HashMap {
 	constructor() {
 		this.#buckets = new Array(16).fill(null);
+		this.#loadFactor = 0.75;
+    	this.#capacity = this.#buckets.length;
+    	this.#occupied = 0;
 	}
 	#buckets;
+	#loadFactor;
+	#capacity;
+	#occupied;
 	hash(key) {
 		let hashCode = 0;
 		const primeNumber = 31;
@@ -23,22 +29,40 @@ class HashMap {
 		}
 		return hashCode;
 	}
+	resize() {
+		const oldBuckets = this.#buckets;
+		this.#capacity *= 2;
+		this.#occupied = 0;
+		this.#buckets = new Array(this.#capacity).fill(null);
+		oldBuckets.forEach((bucket) => {
+			let temp = bucket;
+			while (temp !== null) {
+				this.set(temp.getKey(), temp.value);
+				temp = temp.next;
+			}
+		});
+	}
 	set(key, value) {
+		if (this.#occupied / this.#capacity >= this.#loadFactor)
+			this.resize();
 		let keyValue = this.hash(key);
 		if (keyValue < 0 || keyValue >= this.#buckets.length) {
 			throw new Error("Trying to access index out of bound");
 		}
 		if (this.#buckets[keyValue] === null) {
 			this.#buckets[keyValue] = new BucketNode(key, value);
+			this.#occupied++;
 			return;
 		}
 		let temp = this.#buckets[keyValue];
-		while (temp.next != null && temp.getKey() !== key)
+		while (temp.next !== null && temp.getKey() !== key)
 			temp = temp.next;
 		if (temp.getKey() === key)
 			temp.value = value;
-		else
+		else {
 			temp.next = new BucketNode(key, value);
+			this.#occupied++;
+		}
 	}
 	get(key) {
 		let hashCode = this.hash(key);
@@ -48,7 +72,7 @@ class HashMap {
 		if (this.#buckets[hashCode] === null)
 			return (null);
 		let tempNode = this.#buckets[hashCode];
-		while (tempNode != null && tempNode.getKey() != key)
+		while (tempNode !== null && tempNode.getKey() != key)
 			tempNode = tempNode.next;
 		return (tempNode === null ? null : tempNode.value);
 	}
@@ -69,10 +93,11 @@ class HashMap {
 			tempNode = tempNode.next;
 		}
 		if (tempNode !== null) {
-			if (prevNode !== null)
+			if (prevNode === null)
 				this.#buckets[hashCode] = tempNode.next;
 			else
 				prevNode.next = tempNode.next;
+			this.#occupied--;
 			return (true);
 		}
 		return (false);
@@ -82,7 +107,7 @@ class HashMap {
 		let temp;
 		this.#buckets.forEach((item) => {
 			temp = item;
-			while (temp != null) {
+			while (temp !== null) {
 				counter++;
 				temp = temp.next;
 			}
@@ -91,13 +116,14 @@ class HashMap {
 	}
 	clear() {
 		this.#buckets.fill(null);
+		this.#occupied = 0;
 	}
 	keys() {
 		let temp;
 		const result = [];
 		this.#buckets.forEach((item) => {
 			temp = item;
-			while (temp != null) {
+			while (temp !== null) {
 				result.push(temp.getKey());
 				temp = temp.next;
 			}
@@ -109,7 +135,7 @@ class HashMap {
 		const result = [];
 		this.#buckets.forEach((item) => {
 			temp = item;
-			while (temp != null) {
+			while (temp !== null) {
 				result.push(temp.value);
 				temp = temp.next;
 			}
@@ -121,7 +147,7 @@ class HashMap {
 		const result = [];
 		this.#buckets.forEach((item) => {
 			temp = item;
-			while (temp != null) {
+			while (temp !== null) {
 				const pairs = [];
 				pairs.push(temp.getKey());
 				pairs.push(temp.value);
