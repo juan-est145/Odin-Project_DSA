@@ -49,4 +49,23 @@ class HashMap {
 	has(key) {
 		return (this.get(key) === null ? false : true);
 	}
+	remove(key) {
+		let hashCode = this.hash(key);
+		if (this.#array[hashCode] === null)
+			return (false);
+		let tempNode = this.#array[hashCode];
+		let prevNode = null;
+		while (tempNode !== null && tempNode.getKey() != key) {
+			prevNode = tempNode;
+			tempNode = tempNode.next;
+		}
+		if (tempNode !== null) {
+			if (prevNode !== null)
+				this.#array[hashCode] = tempNode.next;
+			else
+				prevNode.next = tempNode.next;
+			return (true);
+		}
+		return (false);
+	}
 }
