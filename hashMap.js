@@ -95,4 +95,16 @@ class HashMap {
 		});
 		return (result);
 	}
+	values() {
+		let temp;
+		const result = [];
+		this.#array.forEach((item) => {
+			temp = item;
+			while (temp != null) {
+				result.push(temp.value);
+				temp = temp.next;
+			}
+		});
+		return (result);
+	}
 }
