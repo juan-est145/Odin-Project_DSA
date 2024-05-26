@@ -68,4 +68,19 @@ class HashMap {
 		}
 		return (false);
 	}
+	length() {
+		let counter = 0;
+		let temp;
+		this.#array.forEach((item) => {
+			temp = item;
+			while (temp != null) {
+				counter++;
+				temp = temp.next;
+			}
+		});
+		return (counter);
+	}
+	clear() {
+		this.#array.fill(null);
+	}
 }
