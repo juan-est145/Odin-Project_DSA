@@ -35,7 +35,21 @@ class BinaryTree {
 		root.right = this.buildTree(array.slice(midPoint + 1, array.length));
 		return (root);
 	}
+	insert(value, root = this.root) {
+		if (root === null)
+			return (new TreeNode(value));
+		else if (value === root.value) {
+			return (null);
+		}
+		else if (value < root.data)
+			root.left = this.insert(value, root.left);
+		else if (value > root.data)
+			root.right = this.insert(value, root.right);
+		return (root);
+	}
 }
 
 const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+bST.insert(3242);
+bST.insert(24);
 prettyPrint(bST.root);
