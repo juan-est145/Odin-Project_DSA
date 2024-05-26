@@ -36,5 +36,14 @@ class HashMap {
 			temp.value = value;
 		else
 			temp.next = new BucketNode(key, value);
-		}
+	}
+	get(key) {
+		let hashCode = this.hash(key);
+		if (this.#array[hashCode] === null)
+			return (null);
+		let tempNode = this.#array[hashCode];
+		while (tempNode != null && tempNode.getKey() != key)
+			tempNode = tempNode.next;
+		return (tempNode === null ? null : tempNode.value);
+	}
 }
