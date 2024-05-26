@@ -83,4 +83,16 @@ class HashMap {
 	clear() {
 		this.#array.fill(null);
 	}
+	keys() {
+		let temp;
+		const result = [];
+		this.#array.forEach((item) => {
+			temp = item;
+			while (temp != null) {
+				result.push(temp.getKey());
+				temp = temp.next;
+			}
+		});
+		return (result);
+	}
 }
