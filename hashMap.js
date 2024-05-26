@@ -107,4 +107,19 @@ class HashMap {
 		});
 		return (result);
 	}
+	entries () {
+		let temp;
+		const result = [];
+		this.#array.forEach((item) => {
+			temp = item;
+			while (temp != null) {
+				const pairs = [];
+				pairs.push(temp.getKey());
+				pairs.push(temp.value);
+				result.push(pairs);
+				temp = temp.next;
+			}
+		});
+		return (result);
+	}
 }
