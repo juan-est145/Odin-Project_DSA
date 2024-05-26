@@ -46,4 +46,7 @@ class HashMap {
 			tempNode = tempNode.next;
 		return (tempNode === null ? null : tempNode.value);
 	}
+	has(key) {
+		return (this.get(key) === null ? false : true);
+	}
 }
