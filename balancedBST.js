@@ -21,8 +21,7 @@ class TreeNode {
 
 class BinaryTree {
 	constructor(array) {
-		array = array.filter((value, index) => array.indexOf(value) === index);
-		array = array.sort((a, b) => a - b);
+		array = array.filter((value, index) => array.indexOf(value) === index).sort((a, b) => a - b);
 		this.root = this.buildTree(array);
 	}
 	buildTree(array) {
