@@ -38,9 +38,8 @@ class BinaryTree {
 	insert(value, root = this.root) {
 		if (root === null)
 			return (new TreeNode(value));
-		else if (value === root.value) {
+		else if (value === root.value)
 			return (null);
-		}
 		else if (value < root.data)
 			root.left = this.insert(value, root.left);
 		else if (value > root.data)
@@ -155,13 +154,24 @@ class BinaryTree {
 			return (result);
 		return ([]);
 	}
+	depth(node, root = this.root) {
+		let counter = 0;
+		if (node === null)
+			return (0);
+		else if (node.data === root.data)
+			return (counter)
+		else if (node.data < root.data)
+			counter = this.depth(node, root.left) + 1;
+		else if (node.data > root.data)
+			counter = this.depth(node, root.right) + 1;
+		return (counter);
+	}
 }
 
 //const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const bST = new BinaryTree([20, 40, 30, 50, 70, 80]);
 prettyPrint(bST.root);
-console.log(bST.inOrder());
-console.log(bST.preOrder());
-console.log(bST.postOrder());
-bST.deleteItem(50);
+const newNode = new BinaryTree([42]);
+bST.insert(newNode.root.data);
 prettyPrint(bST.root);
+console.log(bST.depth(newNode.root));
