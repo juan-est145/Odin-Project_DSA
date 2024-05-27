@@ -113,14 +113,25 @@ class BinaryTree {
 		if (!callback)
 			return (result);
 	}
+	inOrder(callback, root = this.root) {
+		if (root === null)
+			return ([]);
+		let result = [];
+		result = result.concat(this.inOrder(callback, root.left));
+		if (callback)
+			callback(root);
+		else
+			result.push(root.data);
+		result = result.concat(this.inOrder(callback, root.right));
+		if (!callback)
+			return (result);
+		return ([]);
+	}
 }
 
 //const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const bST = new BinaryTree([20, 40, 30, 50, 70, 80]);
 prettyPrint(bST.root);
+console.log(bST.inOrder());
 bST.deleteItem(50);
-//console.log(bST.levelOrder());
-/*bST.levelOrder((item) => {
-	item.data *= 2;
-});*/
-prettyPrint(bST.root);
+//prettyPrint(bST.root);
