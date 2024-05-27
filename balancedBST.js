@@ -47,6 +47,21 @@ class BinaryTree {
 			root.right = this.insert(value, root.right);
 		return (root);
 	}
+	deleteItem(value, root = this.root) {
+		if (root.data === value && root.left === null && root.right === null)
+			return (null);
+		else if (root.data === value) {
+			if (root.left !== null && root.right === null)
+				return (root.left);
+			else if (root.right !== null && root.left === null)
+				return (root.right);
+		}
+		else if (value < root.data)
+			root.left = this.deleteItem(value, root.left);
+		else if (value > root.data)
+			root.right = this.deleteItem(value, root.right);
+		return (root);
+	}
 	find(value, root = this.root) {
 		if (root === null)
 			return (null);
@@ -78,10 +93,12 @@ class BinaryTree {
 	}
 }
 
-const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+//const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const bST = new BinaryTree([20, 40, 30, 50, 70, 80]);
 prettyPrint(bST.root);
-console.log(bST.levelOrder());
-bST.levelOrder((item) => {
+bST.deleteItem(80);
+//console.log(bST.levelOrder());
+/*bST.levelOrder((item) => {
 	item.data *= 2;
-});
+});*/
 prettyPrint(bST.root);
