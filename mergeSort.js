@@ -14,7 +14,7 @@ function sort(array1, array2) {
 	let array1Index = 0;
 	let array2Index = 0;
 
-	while (array1Index != array1.length || array2Index != array2.length) {
+	while (array1Index !== array1.length || array2Index !== array2.length) {
 		if (array1Index === array1.length) {
 			result.push(array2[array2Index]);
 			array2Index++;
