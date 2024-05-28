@@ -188,7 +188,6 @@ class BinaryTree {
 	}
 }
 
-//const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const bST = new BinaryTree([20, 40, 30, 50, 70, 80, 90]);
 prettyPrint(bST.root);
 console.log(bST.inOrder());
