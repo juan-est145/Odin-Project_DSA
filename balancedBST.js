@@ -188,15 +188,5 @@ class BinaryTree {
 	}
 }
 
-const bST = new BinaryTree([20, 40, 30, 50, 70, 80, 90]);
-prettyPrint(bST.root);
-console.log(bST.inOrder());
-const newNode = new BinaryTree([42]);
-bST.insert(newNode.root.data);
-prettyPrint(bST.root);
-bST.insert(49);
-prettyPrint(bST.root);
-console.log(bST.isBalanced());
-bST.rebalance();
-prettyPrint(bST.root);
-console.log(bST.isBalanced());
+exports.BinaryTree = BinaryTree;
+exports.prettyPrint = prettyPrint;
