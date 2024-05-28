@@ -154,6 +154,13 @@ class BinaryTree {
 			return (result);
 		return ([]);
 	}
+	height(node = this.root) {
+		if (node === null)
+			return (-1);
+		let leftHeight = this.height(node.left);
+		let rightHeight = this.height(node.right);
+		return (Math.max(leftHeight, rightHeight) + 1);
+	}
 	depth(node, root = this.root) {
 		let counter = 0;
 		if (node === null)
@@ -175,3 +182,4 @@ const newNode = new BinaryTree([42]);
 bST.insert(newNode.root.data);
 prettyPrint(bST.root);
 console.log(bST.depth(newNode.root));
+console.log(bST.height());
