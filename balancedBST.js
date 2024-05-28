@@ -173,6 +173,15 @@ class BinaryTree {
 			counter = this.depth(node, root.right) + 1;
 		return (counter);
 	}
+	isBalanced(root = this.root) {
+		if (root === null)
+			return (true);
+		let leftHeight = this.height(root.left);
+		let rightHeight = this.height(root.right);
+		if (Math.max(leftHeight, rightHeight) - Math.min(leftHeight, rightHeight) <= 1)
+			return (this.isBalanced(root.left) && this.isBalanced(root.right));
+		return (false);
+	}
 }
 
 //const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -183,3 +192,4 @@ bST.insert(newNode.root.data);
 prettyPrint(bST.root);
 console.log(bST.depth(newNode.root));
 console.log(bST.height());
+console.log(bST.isBalanced());
