@@ -182,14 +182,22 @@ class BinaryTree {
 			return (this.isBalanced(root.left) && this.isBalanced(root.right));
 		return (false);
 	}
+	rebalance() {
+		const numbers = this.inOrder();
+		this.root = this.buildTree(numbers);
+	}
 }
 
 //const bST = new BinaryTree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-const bST = new BinaryTree([20, 40, 30, 50, 70, 80]);
+const bST = new BinaryTree([20, 40, 30, 50, 70, 80, 90]);
 prettyPrint(bST.root);
+console.log(bST.inOrder());
 const newNode = new BinaryTree([42]);
 bST.insert(newNode.root.data);
 prettyPrint(bST.root);
-console.log(bST.depth(newNode.root));
-console.log(bST.height());
+bST.insert(49);
+prettyPrint(bST.root);
+console.log(bST.isBalanced());
+bST.rebalance();
+prettyPrint(bST.root);
 console.log(bST.isBalanced());
